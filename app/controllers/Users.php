@@ -12,7 +12,11 @@ class Users extends Controller {
 
     public function login(){
         $data = [
-            'title' => 'Login Page'
+            'title' => 'Login Page',
+            'username' => '',
+            'password' => '',
+            'errorUsername' => '',
+            'errorPassword' => ''
         ];
 
         $this->view('users/login', $data);
