@@ -6,50 +6,91 @@
  */
 class Core {
 
-    protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
-    protected $params = [];
+    private $currentController = 'Index';
+    private $currentMethod = 'index';
+    private $params = [];
 
+    /**
+     * Construct: Processes the app by parsing the URL and sets the controller, 
+     * method and method parameters.
+     * @access public
+     */
     public function __construct(){
-        $url = $this->getUrl();
+        $this->parseUrl();
 
-        // Check for controller
-        if(isset($url[0])){
-            if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
-                $this->currentController = ucwords($url[0]);
-                unset($url[0]);
-            }
+        try{
+            $this->getController();
+            $this->getMethod();
+            $this->getParams();
         }
-
-        // Require controller
-        require '../app/controllers/' . $this->currentController . '.php';
-
-        // Instantiate controller
-        $this->currentController = new $this->currentController;
-
-        // Check for method 
-        if(isset($url[1])){
-            // Check inside controller for method
-            if(method_exists($this->currentController, $url[1])){
-                $this->currentMethod = $url[1];
-                unset($url[1]);
-            }
-        } 
-
-        // Set params
-        $this->params = $url ? array_values($url): [];
-
-        // Call a callback with array of params
-        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+        catch(Exception $ex){
+            echo $ex->getMessage();
+        }
     }
 
-    public function getUrl(){
-        if(isset($_GET['url'])){
-            $url = rtrim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = explode('/', $url);
-            
-            return $url;
+    /**
+     * getController: Checks if the first URL element is set, 
+     * replace the default controller class string if the given class exists.
+     * If the class exists, said string is replaced with a new instance of it.
+     * @access private
+     * @return void
+     */
+    private function getController(){
+        if(isset($this->params[0])){
+            if(file_exists('../app/controllers/' . ucwords($this->params[0]) . '.php')){
+                $this->currentController = ucwords($this->params[0]);
+                unset($this->params[0]);
+            }
         }
+        require '../app/controllers/' . $this->currentController . '.php';
+        $this->currentController = new $this->currentController;
+    }
+
+    /**
+     * getMethod: Checks if the second URL element is set, 
+     * replace the default method string if the given method exists inside the 
+     * controller.
+     * @access private
+     * @return void
+     */
+    private function getMethod(){
+        if(isset($this->params[1])){
+            if(method_exists($this->currentController, $this->params[1])){
+                $this->currentMethod = $this->params[1];
+                unset($this->params[1]);
+            }
+        } 
+    }
+
+    /**
+     * getParams: Checks if the URL has any remaining elements, setting the 
+     * parameters as a rebase of it if true or an empty array if false.
+     * @access private
+     * @return void
+     */
+    private function getParams(){
+        $this->params = $this->params ? array_values($this->params): [];
+    }
+
+    /**
+     * Parse URL: Gets the different parts of the URL string.
+     * @access private
+     * @return void
+     */
+    private function parseUrl(){
+        if(isset($_GET['url'])){
+            $this->params = rtrim($_GET['url'], '/');
+            $this->params = filter_var($this->params, FILTER_SANITIZE_URL);
+            $this->params = explode('/', $this->params);
+        }
+    }
+
+    /**
+     * Run: Calls the controller class and method with parameters.
+     * @access public
+     * @return void
+     */
+    public function run(){
+         call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 }
