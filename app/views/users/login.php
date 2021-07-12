@@ -24,7 +24,7 @@
 
             <button id="submit" type="submit" value="submit">Sign In</button>
 
-            <p class="options">Not registered yet? <a href="<?php echo URL_ROOT?>/users/register    ">Register Here</a></p>
+            <p class="options">Not registered yet? <a href="<?php echo URL_ROOT?>/registerController/register">Register Here</a></p>
         </form>
     </div>
 </div>
