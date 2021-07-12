@@ -16,7 +16,11 @@
             <a href="<?php echo URL_ROOT?>/pages/contact">Contact</a>
         </li>
         <li class="btn-login">
-            <a href="<?php echo URL_ROOT?>/users/login">Login</a>
+            <?php if(SESSION::isLoggedIn()): ?>
+                <a href="<?php echo URL_ROOT; ?>/loginController/logout">Logout</a>
+            <?php else: ?>
+                <a href="<?php echo URL_ROOT; ?>/loginController/login">Login</a>
+            <?php endif;?>
         </li>
     </ul>
 </nav>

@@ -12,7 +12,7 @@
     <div class="wrapper-login">
         <h2>Sign In</h2>
 
-        <form action="<?php echo URL_ROOT?>/users/login" method="POST">
+        <form action="<?php echo URL_ROOT?>/loginController/login" method="POST">
             <input type="text" placeholder="Username*" name="username" value="<?php echo $data['username']?>">
             <span class="invalidFeedback">
                 <?php echo $data['errorUsername'];?>

@@ -2,3 +2,4 @@
     require '../app/bootstrap.php';
 
     $init = new Core();
+    $init->run();

@@ -1,6 +1,13 @@
 <?php
 
 class Pages extends Controller{
+    /**
+     * Index: Renders the index view. NOTE: This controller can only be accessed
+     * by authenticated users!
+     * @access public
+     * @example index/index
+     * @return void
+     */
     public function index(){
         $data = [
             'title'=> 'Home Page'

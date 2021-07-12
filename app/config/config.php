@@ -2,9 +2,9 @@
 
 // Database params
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', 'test123');
-define('DB_NAME', 'mcv-login');
+define('DB_USER', 'prabeg');
+define('DB_PASSWORD', 'test1234');
+define('DB_NAME', 'blog');
 
 //APP_ROOT
 define('APP_ROOT', dirname(dirname(__FILE__)));
