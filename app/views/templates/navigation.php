@@ -1,19 +1,19 @@
 <nav class="top-menu">
     <ul>
         <li>
-            <a href="<?php echo URL_ROOT?>/pages/index">Home</a>
+            <a href="<?php echo URL_ROOT?>/indexController/index">Home</a>
         </li>
         <li>
-            <a href="<?php echo URL_ROOT?>/pages/about">About</a>
+            <a href="<?php echo URL_ROOT?>/indexController/about">About</a>
         </li>
         <li>
-            <a href="<?php echo URL_ROOT?>/pages/projects">Projects</a>
+            <a href="<?php echo URL_ROOT?>/indexController/projects">Projects</a>
         </li>
         <li>
-            <a href="<?php echo URL_ROOT?>/pages/blog">Blog</a>
+            <a href="<?php echo URL_ROOT?>/indexController/blog">Blog</a>
         </li>
         <li>
-            <a href="<?php echo URL_ROOT?>/pages/contact">Contact</a>
+            <a href="<?php echo URL_ROOT?>/indexController/contact">Contact</a>
         </li>
         <li class="btn-login">
             <?php if(SESSION::isLoggedIn()): ?>

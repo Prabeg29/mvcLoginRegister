@@ -7,7 +7,6 @@
         require APP_ROOT . '/views/templates/navigation.php';
     ?>
 </div>
-
 <div class="container-login">
     <div class="wrapper-login">
         <h2>Sign In</h2>

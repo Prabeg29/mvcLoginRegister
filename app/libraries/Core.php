@@ -6,7 +6,7 @@
  */
 class Core {
 
-    private $currentController = 'Pages';
+    private $currentController = 'IndexController';
     private $currentMethod = 'index';
     private $params = [];
 
